@@ -1,6 +1,6 @@
-package lesson1;
+package ru.geekbrains.homework.lesson1;
 
-public class lesson1 {
+public class Lesson1 {
 
     public static void main(String[] args) {
         doTask01();

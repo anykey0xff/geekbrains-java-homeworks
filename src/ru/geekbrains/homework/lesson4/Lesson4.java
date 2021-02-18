@@ -1,4 +1,4 @@
-package lesson4;
+package ru.geekbrains.homework.lesson4;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ import java.util.Scanner;
  * 4. *** Доработать искусственный интеллект, чтобы он мог блокировать ходы игрока.
  */
 
-public class lesson4 {
+public class Lesson4 {
 
     static char emptyCellSign = '-';
     static char player1Sign = 'X';

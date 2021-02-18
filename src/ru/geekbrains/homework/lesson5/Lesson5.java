@@ -1,4 +1,4 @@
-package lesson5;
+package ru.geekbrains.homework.lesson5;
 
 /**
  * 1. Создать класс "Сотрудник" с полями: ФИО, должность, email, телефон, зарплата, возраст.
@@ -15,7 +15,7 @@ package lesson5;
  * 5. С помощью цикла вывести информацию только о сотрудниках старше 40 лет.
  */
 
-public class lesson5 {
+public class Lesson5 {
 
     public static void main(String[] args) {
         doTask04();
@@ -28,9 +28,9 @@ public class lesson5 {
     }
 
     private static void outputEmployeesOlderThen40(Employee[] employees) {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getAge() >= 40)
-                employees[i].printFullInformation();
+        for (Employee employee : employees) {
+            if (employee.getAge() >= 40)
+                employee.printFullInformation();
         }
     }
 

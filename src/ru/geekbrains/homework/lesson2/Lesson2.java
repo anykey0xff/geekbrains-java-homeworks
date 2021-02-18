@@ -1,4 +1,4 @@
-package lesson2;
+package ru.geekbrains.homework.lesson2;
 
 /**
  * 1. Задать целочисленный массив, состоящий из элементов 0 и 1. Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].
@@ -30,7 +30,7 @@ package lesson2;
  * Для задач со * не нужно искать решение в интернете, иначе вы теряете весь смысл их выполнения.
  */
 
-public class lesson2 {
+public class Lesson2 {
 
     public static void main(String[] args) {
         doTask01();
@@ -55,9 +55,9 @@ public class lesson2 {
 
     private static void printMultidimensionalArray(String title, int[][] values) {
         System.out.println(title);
-        for (int i = 0; i < values.length; i++) {
-            for (int j = 0; j < values[i].length; j++) {
-                System.out.format("%2d ", values[i][j]);
+        for (int[] value : values) {
+            for (int i : value) {
+                System.out.format("%2d ", i);
             }
             System.out.println();
         }
@@ -143,9 +143,9 @@ public class lesson2 {
         int max = values[0];
         int min = values[0];
 
-        for (int i = 0; i < values.length; i++) {
-            if (max < values[i]) max = values[i];
-            if (min > values[i]) min = values[i];
+        for (int value : values) {
+            if (max < value) max = value;
+            if (min > value) min = value;
         }
         System.out.println("max = " + max + ", min = " + min);
 

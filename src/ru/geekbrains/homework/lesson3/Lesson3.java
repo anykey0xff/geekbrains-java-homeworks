@@ -1,4 +1,4 @@
-package lesson3;
+package ru.geekbrains.homework.lesson3;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -29,7 +29,7 @@ import java.util.Scanner;
  * Используем только маленькие буквы.
  */
 
-public class lesson3 {
+public class Lesson3 {
 
     static int bound = 10;              // Граница загадываемого число [0, N) для игры угадай число
     static int rounds = 3;              // Количество попыток для игры угадай число

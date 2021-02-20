@@ -20,22 +20,25 @@ public abstract class Animal {
     }
 
     public void run(int distance) {
-        System.out.printf("Trying to get %s run %dm... %n", name, distance);
+        String fullName = this.getClass().getSimpleName() + " " + name;
+        System.out.printf("Trying to get %s run %dm... %n", fullName, distance);
         move(distance, maxRunDistance);
     }
 
     public void swim(int distance) {
-        System.out.printf("Trying to get %s swim %dm... %n", name, distance);
+        String fullName = this.getClass().getSimpleName() + " " + name;
+        System.out.printf("Trying to get %s swim %dm... %n", fullName, distance);
         move(distance, maxSwimDistance);
     }
 
     private void move(int distance, int maxDistance) {
+        String fullName = this.getClass().getSimpleName() + " " + name;
         if (maxDistance == 0 || distance <= 0) {
-            System.out.printf("%s can't do this action. %n", name);
+            System.out.printf("%s can't do this action. %n", fullName);
         } else if (distance >= maxDistance) {
-            System.out.printf("The distance is too far! %s can move no more then %dm. %n", name, maxDistance);
+            System.out.printf("The distance is too far! %s can move no more then %dm. %n", fullName, maxDistance);
         } else {
-            System.out.printf("%s moved %dm. %n", name, distance);
+            System.out.printf("%s moved %dm. %n", fullName, distance);
         }
     }
 

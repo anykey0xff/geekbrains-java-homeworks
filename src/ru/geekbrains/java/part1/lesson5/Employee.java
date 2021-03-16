@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson5;
+package ru.geekbrains.java.part1.lesson5;
 
 public class Employee {
 

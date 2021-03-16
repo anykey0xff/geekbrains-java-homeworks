@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson7;
+package ru.geekbrains.java.part1.lesson7;
 
 public class Cat {
     private final String name;

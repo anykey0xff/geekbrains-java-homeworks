@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson6;
+package ru.geekbrains.java.part1.lesson6;
 
 public abstract class Animal {
 

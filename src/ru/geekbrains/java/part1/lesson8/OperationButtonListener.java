@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson8;
+package ru.geekbrains.java.part1.lesson8;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

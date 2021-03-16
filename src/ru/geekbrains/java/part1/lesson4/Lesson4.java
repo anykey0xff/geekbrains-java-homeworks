@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson4;
+package ru.geekbrains.java.part1.lesson4;
 
 import java.util.Random;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson7;
+package ru.geekbrains.java.part1.lesson7;
 
 /**
  * 1. Расширить задачу про котов и тарелки с едой. (брать из методички)

@@ -1,4 +1,4 @@
-package ru.geekbrains.homework.lesson2;
+package ru.geekbrains.java.part1.lesson2;
 
 /**
  * 1. Задать целочисленный массив, состоящий из элементов 0 и 1. Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].

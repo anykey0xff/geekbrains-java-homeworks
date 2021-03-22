@@ -37,19 +37,18 @@ public class Lesson4 {
         doTask02();
         doTask03();
         doTask04();
-        doTask05();
     }
 
     public static void doTask01() {
         System.out.println("TASK_01");
         List<String> strings = List.of("1", "12", "123", "1234");
-        strings.forEach(string -> System.out.println(string));
+        strings.forEach(System.out::println);
     }
 
     public static void doTask02() {
         System.out.println("TASK_02");
         Set<String> setStrings = Set.of("1", "12", "123");
-        Consumer<String> consumer = value -> System.out.println(value);
+        Consumer<String> consumer = System.out::println;
         forItem(setStrings, consumer);
     }
 
@@ -64,17 +63,13 @@ public class Lesson4 {
         System.out.println("TASK_04");
         Optional<String> opt = findAllChars("ccch", 'c');
         opt.ifPresentOrElse(
-                string -> System.out.println(string),
+                System.out::println,
                 () -> System.out.println("no entries")
         );
     }
 
-    public static void doTask05() {
-
-    }
-
     public static void forItem(Set<String> setStrings, Consumer<String> consumer) {
-        setStrings.forEach(value -> consumer.accept(value));
+        setStrings.forEach(consumer);
     }
 
     public static int doubleUp(int integer, Supplier<Integer> supplier) {

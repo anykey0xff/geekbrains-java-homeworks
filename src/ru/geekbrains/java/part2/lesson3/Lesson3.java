@@ -53,5 +53,6 @@ public class Lesson3 {
 
         System.out.println("John: " + phonebook.get("John"));
         System.out.println("Karl: " + phonebook.get("Karl"));
+        System.out.println("Lana: " + phonebook.get("Lana"));
     }
 }

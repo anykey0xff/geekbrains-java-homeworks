@@ -30,7 +30,7 @@ package ru.geekbrains.java.part1.lesson2;
  * Для задач со * не нужно искать решение в интернете, иначе вы теряете весь смысл их выполнения.
  */
 
-public class Lesson2 {
+public class Main {
 
     public static void main(String[] args) {
         doTask01();

@@ -13,7 +13,7 @@ package ru.geekbrains.java.part1.lesson6;
  * 4. * Добавить подсчет созданных котов, собак и животных.
  */
 
-public class Lesson6 {
+public class Main {
     public static void main(String[] args) {
         doTasks();
     }

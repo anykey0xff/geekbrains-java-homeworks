@@ -12,7 +12,7 @@ package ru.geekbrains.java.part2.lesson2;
  * обработать возможные исключения MySizeArrayException и MyArrayDataException, и вывести результат расчета.
  */
 
-public class Lesson2 {
+public class Main {
 
     public static void main(String[] args) {
         String[][] strings = getArray();

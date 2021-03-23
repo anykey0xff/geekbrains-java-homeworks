@@ -36,7 +36,7 @@ import ru.geekbrains.java.part2.lesson1.participant.*;
  * }
  */
 
-public class Lesson1 {
+public class Main {
 
     public static void main(String[] args) {
 

@@ -31,7 +31,7 @@ import java.util.function.Supplier;
  * При «отсылке» сообщение перекидывается из нижнего поля в центральное. (ОПЦИОНАЛЬНО)
  */
 
-public class Lesson4 {
+public class Main {
     public static void main(String[] args) {
         doTask01();
         doTask02();

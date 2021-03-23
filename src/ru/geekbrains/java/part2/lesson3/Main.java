@@ -20,7 +20,7 @@ import java.util.*;
  * тестировать просто из метода main() прописывая add() и get().
  */
 
-public class Lesson3 {
+public class Main {
     public static void main(String[] args) {
         doTask01();
         doTask02();

@@ -29,7 +29,7 @@ import java.util.Scanner;
  * Используем только маленькие буквы.
  */
 
-public class Lesson3 {
+public class Main {
 
     static int bound = 10;              // Граница загадываемого число [0, N) для игры угадай число
     static int rounds = 3;              // Количество попыток для игры угадай число

@@ -15,7 +15,7 @@ import java.util.Scanner;
  * 4. *** Доработать искусственный интеллект, чтобы он мог блокировать ходы игрока.
  */
 
-public class Lesson4 {
+public class Main {
 
     static char emptyCellSign = '-';
     static char player1Sign = 'X';

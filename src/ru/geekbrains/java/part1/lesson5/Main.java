@@ -15,7 +15,7 @@ package ru.geekbrains.java.part1.lesson5;
  * 5. С помощью цикла вывести информацию только о сотрудниках старше 40 лет.
  */
 
-public class Lesson5 {
+public class Main {
 
     public static void main(String[] args) {
         doTask04();

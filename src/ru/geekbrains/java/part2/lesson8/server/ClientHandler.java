@@ -28,18 +28,18 @@ public class ClientHandler {
 
         Thread authWaiting = new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(120000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             if (session.isAlive() && name == null) {
-//                try {
-//                    in.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-                session.interrupt();
                 sendMessage("Timed out for authorization. Session was closed.");
+                session.interrupt();
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -112,7 +112,7 @@ public class ClientHandler {
                     chatServer.broadcast(String.format("User %s left the chat", name));
                     sendMessage("Logged out. Bye.");
                     return;
-                } else{
+                } else {
                     chatServer.broadcast(String.format("%s: %s", name, message));
                 }
             } catch (IOException e) {

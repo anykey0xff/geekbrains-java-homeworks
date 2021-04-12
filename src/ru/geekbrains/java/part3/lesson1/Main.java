@@ -1,5 +1,8 @@
 package ru.geekbrains.java.part3.lesson1;
 
+import ru.geekbrains.java.part3.lesson1.fruits.Apple;
+import ru.geekbrains.java.part3.lesson1.fruits.Orange;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -42,6 +45,7 @@ public class Main {
     }
 
     private static void doTask01() {
+        System.out.printf("%nTask 01 %n");
         String[] strArr = {"abc", "zxy"};
         System.out.println(Arrays.toString(strArr));
         ElementsSwapper<String> integerElementsSwapper = new ElementsSwapper<>();
@@ -50,14 +54,28 @@ public class Main {
     }
 
     private static void doTask02() {
+        System.out.printf("%nTask 02 %n");
         String[] strArr = {"abc", "zxy"};
-        System.out.println(strArr.getClass().getCanonicalName() + ": " + Arrays.toString(strArr));
+        System.out.println(strArr.getClass().getSimpleName() + ": " + Arrays.toString(strArr));
         ArrayToListConverter<String> stringArrayToListConverter = new ArrayToListConverter<>();
         ArrayList<String> srtArrList = stringArrayToListConverter.convert(strArr);
-        System.out.println(srtArrList.getClass().getCanonicalName() + ": " + srtArrList);
+        System.out.println(srtArrList.getClass().getSimpleName() + ": " + srtArrList);
     }
 
     private static void doTask03() {
+
+        System.out.printf("%nTask 03 %n");
+
+        Box<Apple> appleBox1 = new Box<>();
+        Box<Apple> appleBox2 = new Box<>();
+        Box<Orange> orangeBox = new Box<>();
+
+        for (int i = 0; i < 3; i++) appleBox1.put(new Apple());
+        for (int i = 0; i < 5; i++) appleBox2.put(new Apple());
+        for (int i = 0; i < 2; i++) orangeBox.put(new Orange());
+
+        System.out.println("result of compare: " + appleBox1.compare(orangeBox));
+
 
     }
 

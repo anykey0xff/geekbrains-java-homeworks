@@ -64,7 +64,7 @@ public class Main {
 
     private static void doTask03() {
 
-        System.out.printf("%nTask 03 %n");
+        System.out.printf("%nTask 03 %n%n");
 
         Box<Apple> appleBox1 = new Box<>();
         Box<Apple> appleBox2 = new Box<>();
@@ -74,8 +74,21 @@ public class Main {
         for (int i = 0; i < 5; i++) appleBox2.put(new Apple());
         for (int i = 0; i < 2; i++) orangeBox.put(new Orange());
 
-        System.out.println("result of compare: " + appleBox1.compare(orangeBox));
+        System.out.println("First apple box: " + appleBox1);
+        System.out.println("Second apple box: " + appleBox2);
+        System.out.println("Orange box: " + orangeBox);
 
+        System.out.println();
+
+        System.out.println("Result of compare first apple box with orange box: " + appleBox1.compare(orangeBox));
+        System.out.println("Pouring apples from second apple box to first...");
+        appleBox1.pour(appleBox2);
+
+        System.out.println();
+
+        System.out.println("First apple box: " + appleBox1);
+        System.out.println("Second apple box: " + appleBox2);
+        System.out.println("Orange box: " + orangeBox);
 
     }
 

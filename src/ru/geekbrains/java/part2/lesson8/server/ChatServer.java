@@ -1,4 +1,4 @@
-package ru.geekbrains.java.part2.lesson7.server;
+package ru.geekbrains.java.part2.lesson8.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -21,6 +21,7 @@ public class ChatServer {
                 System.out.println("Waiting for a connection...");
                 Socket clientSocket = socket.accept();
                 new ClientHandler(clientSocket, this);
+                System.out.printf("New client connected: %s:%s%n", clientSocket.getInetAddress().getHostAddress(), clientSocket.getPort());
             }
         } catch (IOException e) {
             throw new ChatServerException("Something went wrong", e);
@@ -37,15 +38,6 @@ public class ChatServer {
         }
     }
 
-    public void whisper(String message, String clientName) {
-        for (ClientHandler clientHandler : loggedClients) {
-            if (clientHandler.getName().equals(clientName)) {
-                clientHandler.sendMessage(message);
-                return;
-            }
-        }
-    }
-
     public void subscribe(ClientHandler clientHandler) {
         loggedClients.add(clientHandler);
     }
@@ -57,5 +49,14 @@ public class ChatServer {
     public boolean isLoggedIn(String name) {
         return loggedClients.stream()
                 .anyMatch(client -> client.getName().equals(name));
+    }
+
+    public void whisper(String message, String clientName) {
+        for (ClientHandler clientHandler : loggedClients) {
+            if (clientHandler.getName().equals(clientName)) {
+                clientHandler.sendMessage(message);
+                return;
+            }
+        }
     }
 }

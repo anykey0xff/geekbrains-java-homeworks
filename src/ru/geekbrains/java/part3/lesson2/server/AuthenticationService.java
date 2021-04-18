@@ -1,20 +1,51 @@
 package ru.geekbrains.java.part3.lesson2.server;
 
+import java.sql.*;
 import java.util.Optional;
-import java.util.Set;
 
 public class AuthenticationService {
-    private static final Set<Entry> entries = Set.of(
-            new Entry("User1", "l1", "p1"),
-            new Entry("User2", "l2", "p2"),
-            new Entry("User3", "l3", "p3")
-    );
 
-    public Optional<Entry> findEntryByCredentials(String login, String password) {
+    public Optional<Entry> findEntryByCredentials(String login, String password) throws SQLException {
 
-        return entries.stream()
-                .filter(entry -> entry.getLogin().equals(login) && entry.getPassword().equals(password))
-                .findFirst();
+        try (Connection connection = DBConnection.getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM users WHERE login = ? AND password = ?"
+            );
+            statement.setString(1, login);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return Optional.of(
+                        new Entry(
+                                resultSet.getString("name"),
+                                resultSet.getString("login"),
+                                resultSet.getString("password")
+                        )
+                );
+            } else return Optional.empty();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setNameByCredentials(String newName, String login, String password) {
+        try (Connection connection = DBConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE users SET name = ? WHERE login = ? AND password = ?"
+            );
+            statement.setString(1, newName);
+            statement.setString(2, login);
+            statement.setString(3, password);
+
+            statement.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static class Entry {
@@ -39,5 +70,6 @@ public class AuthenticationService {
         public String getPassword() {
             return password;
         }
+
     }
 }

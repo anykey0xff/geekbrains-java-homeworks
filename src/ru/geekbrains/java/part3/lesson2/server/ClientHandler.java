@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class ClientHandler {
@@ -12,6 +13,8 @@ public class ClientHandler {
     private final DataOutputStream out;
     private final ChatServer chatServer;
     private String name;
+    private String login;
+    private String password;
 
     public ClientHandler(Socket socket, ChatServer chatServer) {
         this.chatServer = chatServer;
@@ -28,11 +31,8 @@ public class ClientHandler {
                 socket.setSoTimeout(120_000); // даем пользователю 120 секунд, чтобы сделать попытку авторизации.
                 doAuthentication();
             } catch (SocketException e) {
+                sendMessage("Time out authorization. Session was closed.");
                 e.printStackTrace();
-            } finally {
-                if (name == null) {
-                    sendMessage("Time out authorization. Session was closed.");
-                }
             }
 
             try {
@@ -57,9 +57,9 @@ public class ClientHandler {
 
     private void doAuthentication() {
         sendMessage("Welcome! Please do authentication.\n"
-            + "Please use command: -auth your_login your_pass"
+                + "Please use command: -auth your_login your_pass"
         );
-        while (!Thread.currentThread().isInterrupted()) {
+        while (true) {
             try {
                 String message = in.readUTF();
                 if (message.startsWith("-auth")) {
@@ -74,9 +74,13 @@ public class ClientHandler {
                         AuthenticationService.Entry credentials = mayBeCredentials.get();
                         if (!chatServer.isLoggedIn(credentials.getName())) {
                             name = credentials.getName();
+                            this.login = credentials.getLogin();
+                            this.password = credentials.getPassword();
                             chatServer.broadcast(String.format("User %s entered the chat", name));
                             chatServer.subscribe(this);
-                            sendMessage(String.format("Welcome %s!", credentials.getName()));
+                            sendMessage(String.format(
+                                    "Welcome %s!%nAvailable commands are:%n/q - quit%n/w - whisper%n/c - change name",
+                                    credentials.getName()));
                             return;
                         } else {
                             sendMessage(String.format("User with name %s is already logged in", credentials.getName()));
@@ -90,14 +94,25 @@ public class ClientHandler {
                 }
             } catch (IOException e) {
                 throw new ChatServerException("Something went wrong during client authentication.", e);
+            } catch (SQLException e) {
+                throw new ChatServerException("Something went wrong during connection to data base.", e);
             }
         }
+    }
+
+    private void changeName(String newName) throws SQLException {
+
+        chatServer.getAuthenticationService().setNameByCredentials(newName, login, password);
+        chatServer.broadcast("User " + name + " changes nickname to " + newName);
+        name = newName;
+
     }
 
     public void receiveMessage() {
         while (true) {
             try {
                 String message = in.readUTF();
+
                 if (message.startsWith("/w")) {
                     String[] messageStruct = message.split("\\s");
                     String clientName = messageStruct[1];
@@ -107,15 +122,23 @@ public class ClientHandler {
                     }
                     message = String.format("%s whispers: %s", name, messageBuilder);
                     chatServer.whisper(message, clientName);
-                } else if (message.startsWith("/quit")) {
+
+                } else if (message.startsWith("/q")) {
                     chatServer.unsubscribe(this);
                     chatServer.broadcast(String.format("User %s left the chat", name));
                     sendMessage("Logged out. Bye.");
                     return;
+
+                } else if (message.startsWith("/c")) {
+                    String[] messageStruct = message.split("\\s");
+                    String newName = messageStruct[1];
+                    changeName(newName);
+
                 } else {
                     chatServer.broadcast(String.format("%s: %s", name, message));
+
                 }
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new ChatServerException("Something went wrong during receiving the message.", e);
             }
         }

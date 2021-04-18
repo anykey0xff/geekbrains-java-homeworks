@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Optional;
 
 public class ClientHandler {
@@ -21,30 +22,29 @@ public class ClientHandler {
             throw new ChatServerException("Something went wrong during client establishing.", e);
         }
 
-        Thread session = new Thread(() -> {
-            doAuthentication();
-            listen();
-        });
+        new Thread(() -> {
 
-        Thread authWaiting = new Thread(() -> {
             try {
-                Thread.sleep(120000);
-            } catch (InterruptedException e) {
+                socket.setSoTimeout(120_000); // даем пользователю 120 секунд, чтобы сделать попытку авторизации.
+                doAuthentication();
+            } catch (SocketException e) {
                 e.printStackTrace();
-            }
-            if (session.isAlive() && name == null) {
-                sendMessage("Timed out for authorization. Session was closed.");
-                session.interrupt();
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            } finally {
+                if (name == null) {
+                    sendMessage("Time out authorization. Session was closed.");
                 }
             }
-        });
 
-        session.start();
-        authWaiting.start();
+            try {
+                socket.setSoTimeout(0);
+                listen();
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
+
+        })
+                .start();
+
     }
 
     public String getName() {
@@ -56,12 +56,12 @@ public class ClientHandler {
     }
 
     private void doAuthentication() {
-        sendMessage("Welcome! Please do authentication.");
-
+        sendMessage("Welcome! Please do authentication.\n"
+            + "Please use command: -auth your_login your_pass"
+        );
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 String message = in.readUTF();
-
                 if (message.startsWith("-auth")) {
                     String[] credentialsStruct = message.split("\\s");
                     String login = credentialsStruct[1];

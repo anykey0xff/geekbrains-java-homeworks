@@ -1,0 +1,18 @@
+Welcome! Please do authentication.
+Please use command: -auth your_login your_passWelcome! Please do authentication.Welcome! Please do authentication.Welcome! Please do authentication.
+Please use command: -auth your_login your_passIncorrect authentication message. Please use valid command: -auth your_login your_passWelcome User1!
+Available commands are:
+/q - quit
+/w - whisper
+/c - change nameUser1: 123User1: 321User1: 213123123123213Welcome! Please do authentication.
+Please use command: -auth your_login your_pass
+Welcome User1!
+Available commands are:
+/q - quit
+/w - whisper
+/c - change name
+Welcome! Please do authentication.
+Please use command: -auth your_login your_pass
+Welcome! Please do authentication.
+Please use command: -auth your_login your_pass
+User with name User1 is already logged in

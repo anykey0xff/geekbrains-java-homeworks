@@ -11,7 +11,7 @@ public class ChatCommunication {
         return file;
     }
 
-    private final File file = new File("C:\\Users\\ivashchenko\\IdeaProjects\\geekbrains-java-homeworks\\src\\ru\\geekbrains\\java\\part3\\lesson3\\client\\rss\\history.txt");
+    private final File file = new File("/home/anykey/IdeaProjects/geekbrains-java-homeworks/src/ru/geekbrains/java/part3/lesson3/client/rss/history.txt");
 
     public ChatCommunication(String host, int port) {
         try {
